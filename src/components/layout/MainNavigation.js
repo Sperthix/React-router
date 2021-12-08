@@ -4,9 +4,7 @@ import styles from "./MainNavigation.module.css";
 const MainNavigation = () => {
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
-        Great AllQuotes
-      </div>
+      <div className={styles.logo}>Great AllQuotes</div>
       <nav className={styles.nav}>
         <ul>
           <li>
