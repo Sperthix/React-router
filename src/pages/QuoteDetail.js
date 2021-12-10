@@ -5,6 +5,7 @@ import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
 import Comments from "../components/comments/Comments";
+import { Link } from "react-router-dom";
 
 const DUMMY_QUOTES = [
   { id: "q1", author: "Nobody", text: "Learning react is fun" },
@@ -23,6 +24,15 @@ const QuoteDetail = () => {
   return (
     <Fragment>
       <HighlightedQuote text={quote.text} author={quote.author} />
+      <Route path={`/quotes/${params.quoteId}`} exact>
+        <Link
+          className="centered btn--flat"
+          to={`/quotes/${params.quoteId}/comments`}
+        >
+          Open comment section
+        </Link>
+      </Route>
+
       <Route path={`/quotes/${params.quoteId}/comments`}>
         <Comments />
       </Route>
