@@ -1,30 +1,36 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, Link } from 'react-router-dom';
 
-import Welcome from "./pages/Welcome";
-import Products from "./pages/Products";
-import ProductDetail from "./pages/ProductDetail";
-import MainHeader from "./components/MainHeader";
+import AllQuotes from './pages/AllQuotes';
+import QuoteDetail from './pages/QuoteDetail';
+import NewQuote from './pages/NewQuote';
+import NotFound from './pages/NotFound';
+import Layout from './components/layout/Layout';
+import Comments from './components/comments/Comments';
 
 function App() {
   return (
-    <div>
-      <MainHeader />
-      <main>
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/welcome" />} />
-          <Route path="/welcome/*" element={<Welcome />}>
-            <Route path="new-user" element={<p>Welcome, new user!</p>} />
-          </Route>
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
-        </Routes>
-      </main>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path='/' element={<Navigate replace to='/quotes' />} />
+        <Route path='/quotes' element={<AllQuotes />} />
+        <Route path='/quotes/:quoteId' element={<QuoteDetail />}>
+          <Route
+            path=''
+            element={
+              <div className='centered'>
+                <Link className='btn--flat' to={`comments`}>
+                  Load Comments
+                </Link>
+              </div>
+            }
+          />
+          <Route path={`comments`} element={<Comments />} />
+        </Route>
+        <Route path='/new-quote' element={<NewQuote />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </Layout>
   );
 }
 
 export default App;
-
-// our-domain.com/welcome => Welcome Component
-// our-domain.com/products => Products Component
-// our-domain.com/product-detail/a-book
