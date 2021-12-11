@@ -10,11 +10,6 @@ import { getSingleQuote } from "../lib/api";
 import { Link, useRouteMatch } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 
-const DUMMY_QUOTES = [
-  { id: "q1", author: "Nobody", text: "Learning react is fun" },
-  { id: "q2", author: "Sperthix", text: "Learning react is ez" },
-];
-
 const QuoteDetail = () => {
   const params = useParams();
   const match = useRouteMatch();
@@ -30,7 +25,7 @@ const QuoteDetail = () => {
 
   useEffect(() => {
     sendRequest(quoteId);
-  }, [sendRequest]);
+  }, [sendRequest, quoteId]);
 
   if (status === "pending") {
     return (
